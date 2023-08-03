@@ -58,7 +58,6 @@ const Products = () => {
                   className="text-yellow-400 md:hidden cursor-pointer"
                   onClick={() => {
                     setOpen(!open);
-                    console.log("clicking", open);
                   }}
                 >
                   <TuneIcon />

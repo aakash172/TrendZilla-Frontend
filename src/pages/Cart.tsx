@@ -50,14 +50,14 @@ const Cart = () => {
     const { data } = await axios.get<Cart>(`${api}cart/`, config);
     cartDispatch({ type: "GET_CART", payload: data.items });
     setLoading(false);
-    console.log(data.items, "data");
+
   };
 
   useEffect(() => {
     getCart();
   }, []);
 
-  console.log(cart, "cart");
+
 
   const removeFromCart = async (productId: number) => {
     try {
@@ -67,7 +67,7 @@ const Cart = () => {
           Authorization: `Bearer ${user?.token}`,
         },
       };
-      const { data } = await axios.post(`${api}cart/`, { productId }, config);
+      await axios.post(`${api}cart/`, { productId }, config);
       cartDispatch({ type: "REMOVE_FROM_CART", payload: productId });
       setRemoveLoading((prev) => ({ ...prev, [productId]: false }));
 
@@ -81,7 +81,7 @@ const Cart = () => {
         progress: undefined,
         theme: "light",
       });
-      console.log(data, " deleted data");
+
     } catch (error) {
       console.log(error);
       setRemoveLoading((prev) => ({ ...prev, [productId]: false }));
@@ -163,11 +163,10 @@ const Cart = () => {
                         <span className="font-lora text-xl">{product.qty}</span>
                         <button
                           disabled={product.qty === 1}
-                          className={` font-lora text-2xl font-bold  ${
-                            product.qty === 1
+                          className={` font-lora text-2xl font-bold  ${product.qty === 1
                               ? "text-gray-400"
                               : "text-yellow-400"
-                          }`}
+                            }`}
                           onClick={() =>
                             cartDispatch({
                               type: "DEC_QTY",

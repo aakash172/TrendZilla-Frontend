@@ -47,7 +47,8 @@ const Wishlist = () => {
   useEffect(() => {
     getWish();
   }, []);
-  console.log(wish, "wish");
+
+
 
   const removeWish = async (productId: number) => {
     try {
@@ -57,7 +58,7 @@ const Wishlist = () => {
           Authorization: `Bearer ${user?.token}`,
         },
       };
-      const { data } = await axios.post(`${api}wish/`, { productId }, config);
+      await axios.post(`${api}wish/`, { productId }, config);
       wishDispatch({ type: "REMOVE_FROM_WISH", payload: productId });
       setWishLoading((prev) => ({ ...prev, [productId]: false }));
 
@@ -71,7 +72,8 @@ const Wishlist = () => {
         progress: undefined,
         theme: "light",
       });
-      console.log(data, " deleted data");
+
+
     } catch (error) {
       console.log(error);
       setWishLoading((prev) => ({ ...prev, [productId]: false }));
@@ -100,7 +102,7 @@ const Wishlist = () => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data } = await axios.post(
+        await axios.post(
           `${api}cart/add`,
           {
             productId: product._id,
@@ -126,7 +128,6 @@ const Wishlist = () => {
           ...prev,
           [product._id]: false,
         }));
-        console.log(data, "data");
       } else {
         navigate("/login");
       }
@@ -154,7 +155,7 @@ const Wishlist = () => {
       ) : (
         <>
           <div className="mt-32 flex items-center justify-center ">
-            {wish.length === 0 && (
+            {(wish === undefined || wish.length === 0) && (
               <div className="flex flex-col  items-center space-y-4">
                 <h1 className="text-2xl uppercase font-lora font-bold">
                   your wishlist is empty
@@ -166,7 +167,7 @@ const Wishlist = () => {
             )}
           </div>
           <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {wish.map(({ product }) => (
+            {wish && wish.map(({ product }) => (
               <div
                 key={product._id}
                 className="shadow-md relative py-4 px-2  flex flex-col justify-center items-center space-y-2"

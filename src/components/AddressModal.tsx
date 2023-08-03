@@ -53,7 +53,7 @@ const AddressModal = ({ setOpenModel }: ModalState) => {
         addressDispatch({ type: "ADD_ADDRESS", payload: data });
         setOpenModel(false);
       }
-      console.log(data, "data address");
+
     } catch (error) {
       toast.error("somehting went wrong");
     }

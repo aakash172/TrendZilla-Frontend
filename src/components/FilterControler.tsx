@@ -17,7 +17,6 @@ const FilterControl = ({
   value,
   label,
 }: FilterControlProps) => {
-  console.log({ value, label, options }, "value");
   return (
     <div className="flex justify-between items-center cursor-pointer">
       {label && <label className="uppercase text-gray-500">{label}:</label>}

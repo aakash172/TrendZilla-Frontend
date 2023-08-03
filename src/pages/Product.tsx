@@ -29,7 +29,7 @@ const Product = () => {
     productDispatch,
   } = useProduct();
 
-  console.log(product, "product");
+
   const { cartDispatch } = useCart();
   const {
     userState: { user },
@@ -38,7 +38,7 @@ const Product = () => {
   const getOneProduct = async () => {
     setLoading(true);
     const { data } = await axios.get<Product>(`${api}products/find/${id}`);
-    console.log(data, "data");
+
     productDispatch({ type: "GET_ONE_PRODUCT", payload: data });
     setLoading(false);
   };
@@ -50,7 +50,7 @@ const Product = () => {
   const getSuggestedProducts = async () => {
     const { data } = await axios.get(`${api}products/${id}`);
     setSuggestedProducts(data);
-    console.log(data, "suggested data");
+
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Product = () => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data } = await axios.post<CartItem>(
+        await axios.post<CartItem>(
           `${api}cart/add`,
           {
             productId: product._id,
@@ -89,7 +89,7 @@ const Product = () => {
           theme: "light",
         });
         setCartLoading(false);
-        console.log(data, "data");
+
       } else {
         navigate("/login");
       }
@@ -116,7 +116,7 @@ const Product = () => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data } = await axios.post(
+        await axios.post(
           `${api}wish/add`,
           {
             productId: product._id,
@@ -139,7 +139,7 @@ const Product = () => {
           theme: "light",
         });
         setWishLoading(false);
-        console.log(data, "data");
+
       } else {
         navigate("/login");
       }
@@ -212,9 +212,8 @@ const Product = () => {
                   </button>
                   <p className="text-xl font-lora">{qty}</p>
                   <button
-                    className={`text-2xl cursor-pointer font-lora ${
-                      product.qty === 1 ? "text-gray-400" : "text-black"
-                    }`}
+                    className={`text-2xl cursor-pointer font-lora ${product.qty === 1 ? "text-gray-400" : "text-black"
+                      }`}
                     onClick={() => setQty(qty - 1)}
                     disabled={qty === 1}
                   >

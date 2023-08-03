@@ -38,7 +38,7 @@ toast.success(`welcome back ${data.name}`, {
   theme: "light",
 });
         navigate("/");
-        console.log(data, "data");
+
         setLoading(false);
       }
 

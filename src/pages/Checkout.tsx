@@ -56,7 +56,7 @@ const Checkout = () => {
       },
     };
     const { data } = await axios.get(`${api}cart/`, config);
-    console.log(data, "in checkout page the cart data");
+
     setTotal(
       data.items.reduce((total: number, item: CartItem) => {
         const itemPrice = item.product.price * item.product.qty;
@@ -84,7 +84,7 @@ const Checkout = () => {
   useEffect(() => {
     getAddress();
   }, []);
-  console.log(address, "address");
+
 
   const deleteHandler = async (id: string) => {
     const config = {
@@ -135,7 +135,7 @@ const Checkout = () => {
       } = await axios.post(`${api}payment/checkout`, {
         amount: subTotal,
       });
-      console.log(order, "order");
+   
       const options = {
         key,
         amount: order.amount,
@@ -219,7 +219,7 @@ const Checkout = () => {
                       delete
                     </button>
                   </div>
-                  {}
+                  { }
                   <div className="flex justify-start items-center mt-1">
                     <input
                       type="radio"

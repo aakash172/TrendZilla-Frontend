@@ -69,7 +69,7 @@ const Filters = ({ setOpen }: OpenState) => {
     setSearch(" ");
   };
 
-  console.log({ price, brand, category, size, search });
+ 
   useEffect(() => {
     productDispatch({
       type: "FILTER_CHANGE",

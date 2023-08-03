@@ -29,7 +29,7 @@ const ProductItem = (item: Product) => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data } = await axios.post<CartItem>(
+        await axios.post<CartItem>(
           `${api}cart/add`,
           {
             productId: product._id,
@@ -52,7 +52,6 @@ const ProductItem = (item: Product) => {
           progress: undefined,
           theme: "light",
         });
-        console.log(data, "data");
       } else {
         navigate("/login");
       }
@@ -79,7 +78,7 @@ const ProductItem = (item: Product) => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data } = await axios.post(
+        await axios.post(
           `${api}wish/add`,
           {
             productId: product._id,
@@ -102,7 +101,6 @@ const ProductItem = (item: Product) => {
           progress: undefined,
           theme: "light",
         });
-        console.log(data, "data");
       } else {
         navigate("/login");
       }
